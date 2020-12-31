@@ -14,19 +14,29 @@ public class NQueensBruteForce{
         return  r + arr[arr.length - 1] + " }";
     }
 
+    static int[] copyFromSet(LinkedHashSet<Integer> perm){
+        return perm.stream()
+            .mapToInt(
+                Integer::intValue
+            ).toArray();
+    }
+
+    static void removeLastElement(LinkedHashSet<Integer> perm){
+        Iterator<Integer> i = perm.iterator();
+        for(; i.hasNext(); i.next());
+        i.remove();
+    }
+
     static void generatePermutations(List <int[]>permList, LinkedHashSet<Integer> perm, int n){
         if(perm.size() == n) {
-            //not so pretty way to turn LinkedHashSet into array
-            permList.add(perm.stream().mapToInt(Integer::intValue).toArray());
+            permList.add(copyFromSet(perm));
             return;
         }
         for(int i = 0; i < n; i++){
             if(!perm.contains(i)) {
                 perm.add(i);
                 generatePermutations(permList, perm, n);
-                Iterator<Integer> k = perm.iterator();
-                for(; k.hasNext(); k.next());//iterate to last element
-                k.remove();//remove it
+                removeLastElement(perm);
             }
         }
     }
@@ -57,7 +67,7 @@ public class NQueensBruteForce{
 
         for(int []arr : permutations) {
             if(isSolution(arr)) {
-                System.out.println(toString(arr));
+                System.out.println(toString(arr)); // print valid solutions.
             }
         }
     }
