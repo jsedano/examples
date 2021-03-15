@@ -12,6 +12,14 @@ public class LinkedList<T extends Comparable<? super T>> {
         return size == 0;
     }
 
+    /**
+    * adds an element at the end of the list
+    * - if list is empty add new element as head and tail
+    * - set this new node to be the nextNode for the tail
+    * - update the tail
+    * - increment size
+    * O(1) constant time since we have a reference to the tail
+    **/
     public void add(T value) {
         if(size == 0) {
             head = new SingleNode<T>(value, null);
@@ -23,6 +31,14 @@ public class LinkedList<T extends Comparable<? super T>> {
         size++;
     }
 
+    /**
+    * adds an element at the beggining of the list
+    * - if list is empty add new element as head and tail
+    * - set head to be the the nextNode for the new node
+    * - update the head
+    * - increment size
+    * O(1)
+    **/
     public void prepend(T value) {
         if(size == 0) {
             head = new SingleNode<T>(value, null);
@@ -33,6 +49,13 @@ public class LinkedList<T extends Comparable<? super T>> {
         size++;
     }
 
+    /**
+    * get a reference to a node based on the supplied index
+    * - validate if the index is valid
+    * - if index is head (0) or tail(size - 1) return that.
+    * - iterate nodes until we reach the index we want, return that node
+    * O(n) since we possibly need to go from 1 to size - 2
+    **/
     private SingleNode<T> getSingleNodeByIndex(int index) {
         if(size <= 0 || index >= size) {
             throw new IndexOutOfBoundsException();
@@ -55,6 +78,16 @@ public class LinkedList<T extends Comparable<? super T>> {
         return getSingleNodeByIndex(index).getValue();
     }
 
+    /**
+    * insert a value in a given index shifting all other values one position
+    * - validate if the index is valid
+    * - if index is head (0) or tail(size - 1) we add or prepend
+    * - iterate nodes until we reach the node that is previous to the node we
+    *   want to insert (we do this by calling getSingleNodeByIndex)
+    * - insert new node as next node of the previous node and add the
+    *   next node of the next node of previous node as next node of the new node
+    * O(n) since we possibly need to go from 1 to size - 2
+    **/
     public void add(T value, int index) {
         if(size <= 0 || index >= size) {
             throw new IndexOutOfBoundsException();
@@ -70,6 +103,13 @@ public class LinkedList<T extends Comparable<? super T>> {
         }
     }
 
+    /**
+    * returns the index of the first occurence of the value in the list
+    * - we iterate comparing the value of the nodes to the supplied value.
+    * - if we found the value return 1
+    * - if we don't find the value return -1
+    * O(n)
+    **/
     public int indexOf(T value) {
         SingleNode<T> singleNode = head;
         for(int i = 0; i < size; i++) {
@@ -82,6 +122,15 @@ public class LinkedList<T extends Comparable<? super T>> {
         return -1;
     }
 
+    /**
+    * removes an element from the list using index
+    * - validate if the index is valid
+    * - if the index is head, just set head to be head.nextNode
+    * - iterate until we get a reference to the previous node we want to remove
+    * - set previousNode.nextNode to be previousNode.nextNode.nextNode
+    * - decrement size
+    * O(n)
+    **/
     public void removeByIndex(int index) {
         if(size <= 0 || index >= size) {
             throw new IndexOutOfBoundsException();
@@ -95,6 +144,15 @@ public class LinkedList<T extends Comparable<? super T>> {
         size--;
     }
 
+    /**
+    * removes the first appereance of an element from the list.
+    * - if list is empty dont do nothing
+    * - keep a reference to previous node and a reference to current node
+    * - if current node value is equals to the value we are looking for then
+    *   set previousNode.nextNode to be currentNode.nextNode
+    * - decrement size
+    * O(n)
+    **/
     public void removeByValue(T value) {
         if(size == 0) {
             return;
