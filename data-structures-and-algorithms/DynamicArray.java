@@ -15,6 +15,14 @@ public class DynamicArray<T> {
         return size == 0;
     }
 
+    /**
+    * adds a value at the end of the array
+    * - puts a value at size and then increases size by 1
+    * - if size is equals to the inner array size we need to grow the inner
+    *   array, we achieve this by instanciating a new array doubling the size
+    *   of the previous array and we copy the elements to the array.
+    * O(1) amortised (because we dont enlarge at every insertion)
+    **/
     public void add(T value) {
          if (size == innerArray.length) {
              T newArray[] =  (T[]) new Object[innerArray.length * 2];
@@ -25,6 +33,10 @@ public class DynamicArray<T> {
          size++;
     }
 
+    /**
+    * adds a value at any valid index and moves other values one position
+    * O(n)
+    **/
     public void addAtIndex(T value, int index) {
         if(index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
@@ -56,6 +68,10 @@ public class DynamicArray<T> {
         innerArray[index] = value;
     }
 
+    /**
+    * removes a value at any valid index and moves other values one position
+    * O(n)
+    **/
     public void remove(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
