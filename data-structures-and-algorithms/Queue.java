@@ -12,9 +12,17 @@ public class Queue<T> {
         enqueueIndex = 0;
     }
 
+    /**
+    * Dequeues an element from the queue
+    * - if queue is empty we raise an exception
+    * - take out the element and return it
+    * - decrease size
+    * - increase dequeue index
+    * O(1)
+    **/
     public T dequeue() {
         if(size == 0) {
-            throw new NullPointerException("empty stack");
+            throw new NullPointerException("empty queue");
         }
         T valueToDequeue = innerArray[dequeueIndex];
         innerArray[dequeueIndex] = null;
@@ -27,6 +35,14 @@ public class Queue<T> {
         return valueToDequeue;
     }
 
+    /**
+    * Enqueues an element from the queue
+    * - if queue is full we dont add the element
+    * - adds element to the queue at enqueue index
+    * - increase size
+    * - increase enqueue index
+    * O(1)
+    **/
     public boolean enqueue(T valueToPush) {
         if(size == innerArray.length) {
             return false;
@@ -47,20 +63,22 @@ public class Queue<T> {
     }
 
     public static void main(String []args){
-        Queue<Character> stack = new Queue<Character>(5);
-        stack.enqueue('h');
-        stack.enqueue('e');
-        stack.enqueue('l');
-        stack.enqueue('l');
-        stack.enqueue('o');
-        stack.enqueue('!');
+        Queue<Character> queue = new Queue<Character>(5);
+        queue.enqueue('h');
+        queue.enqueue('h');
+        queue.enqueue('e');
+        queue.enqueue('l');
+        System.out.println("-->" + queue.dequeue());
+        queue.enqueue('l');
+        queue.enqueue('o');
+        queue.enqueue('!');
 
-        while(!stack.isEmpty()){
-            System.out.println(stack.dequeue());
+        while(!queue.isEmpty()){
+            System.out.println(queue.dequeue());
         }
 
         try {
-            stack.dequeue();
+            queue.dequeue();
         } catch(NullPointerException e) {
             System.out.println(e.getMessage());
         }
