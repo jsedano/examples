@@ -1,13 +1,13 @@
-public class BinaryHeap<T extends Comparable<? super T>> {
+public class PriorityQueue<T extends Comparable<? super T>> {
     private DynamicArray<T> array;
     private boolean max;
 
-    public BinaryHeap() {
+    public PriorityQueue() {
         max = true;
         array = new DynamicArray<T>();
     }
 
-    public BinaryHeap(boolean max) {
+    public PriorityQueue(boolean max) {
         this();
         this.max = max;
     }
@@ -79,7 +79,7 @@ public class BinaryHeap<T extends Comparable<? super T>> {
     }
 
     public static void main(String []args){
-        BinaryHeap<Integer> maxHeap = new BinaryHeap<Integer>();
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>();
         System.out.println(maxHeap.max);
         maxHeap.add(0);
         System.out.println(maxHeap);
