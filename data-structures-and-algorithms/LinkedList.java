@@ -140,6 +140,9 @@ public class LinkedList<T extends Comparable<? super T>> {
         } else {
             SingleNode<T> singleNode = getSingleNodeByIndex(index - 1);
             singleNode.setNextNode(singleNode.getNextNode().getNextNode());
+            if (index == size - 1) {
+                tail = singleNode;
+            }
         }
         size--;
     }
