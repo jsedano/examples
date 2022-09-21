@@ -5,3 +5,7 @@
 *.jar
 **/target/**
 .DS_Store
+**/.idea/**
+**/.mvn/**
+*.cmd
+**/mvnw
