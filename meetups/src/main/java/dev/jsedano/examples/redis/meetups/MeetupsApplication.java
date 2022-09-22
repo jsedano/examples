@@ -1,6 +1,8 @@
 package dev.jsedano.examples.redis.meetups;
 
 import com.redis.om.spring.annotations.EnableRedisDocumentRepositories;
+import dev.jsedano.examples.redis.meetups.util.InfoLoader;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,17 +17,24 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableRedisDocumentRepositories(basePackages = "dev.jsedano.examples.redis.meetups.*")
 public class MeetupsApplication {
 
-	@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.any())
-				.build();
-	}
+  @Bean
+  public Docket api() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.any())
+        .paths(PathSelectors.any())
+        .build();
+  }
 
-	public static void main(String[] args) {
-		SpringApplication.run(MeetupsApplication.class, args);
-	}
+  @Bean
+  CommandLineRunner loadTestData(InfoLoader infoLoader) {
+    return args -> {
+      infoLoader.deleteAll();
+      infoLoader.load();
+    };
+  }
 
+  public static void main(String[] args) {
+    SpringApplication.run(MeetupsApplication.class, args);
+  }
 }
