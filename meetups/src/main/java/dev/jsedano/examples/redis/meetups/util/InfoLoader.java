@@ -166,7 +166,7 @@ public class InfoLoader {
                 .title(
                     String.format(
                         eventNames.get(random.nextInt(eventNames.size())),
-                        community.getName().substring(0, community.getName().indexOf(' '))))
+                        community.getTechnologies().stream().toList().get(0)))
                 .communityId(community.getId())
                 .date(randomLocalDateTime())
                 .build());

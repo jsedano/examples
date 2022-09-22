@@ -16,11 +16,11 @@ import org.springframework.data.annotation.Id;
 public class Community {
   @Id @Indexed private String id;
 
-  @Indexed @NonNull private String name;
+  @Searchable @NonNull private String name;
 
   @Searchable @NonNull private String description;
 
-  @Searchable @NonNull private Set<String> technologies;
+  @Indexed @NonNull private Set<String> technologies;
 
   @Indexed @NonNull private Set<String> members;
 }
