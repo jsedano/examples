@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Thymeleaf hello world</title>
+</head>
+<body>
+
+<p>First name: <span th:text="*{first_name}?: '(no first name specified)'">first_name</span>.</p>
+<p>Last name: <span th:text="*{last_name}?: '(no last name specified)'">last_name</span>.</p>
+
+</body>
+</html>
