@@ -44,11 +44,23 @@
         <th>Leader</th>
         <th>Type</th>
         <th>Members</th>
+        <th>Update</th>
+        <th>Delete</th>
         <tr th:each="c : ${communityList}">
             <td th:text="${c.name}"/>
             <td th:text="${c.leader}"/>
             <td th:text="${c.type}"/>
             <td th:text="${c.members}"/>
+            <td>
+                <form th:action="@{/community/update/{id}(id=${c.communityId})}" method="GET">
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/community/delete/{id}(id=${c.communityId})}" method="GET">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
     </table>
 </div>
