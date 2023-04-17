@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table, th, td, input, select, button{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+<div>
+    <form action="/community/save" th:object="${community}" method="POST">
+        <input type="text" placeholder="Name" th:field="${community.name}">
+        <input type="text" placeholder="Leader" th:field="${community.leader}">
+
+
+        <select th:field="${community.type}">
+            <option th:each="type : ${T(dev.jsedano.examples.springthymeleaf.entities.Type).values()}"
+                    th:value="${type}"
+                    th:text="${type}">
+            </option>
+        </select>
+
+        <input type="text" placeholder="Members" th:field="${community.members}">
+        <button type="submit">New community</button>
+
+        <div th:if="${#fields.hasAnyErrors()}">
+            <ul>
+                <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+            </ul>
+        </div>
+
+    </form>
+</div>
+
+<div th:unless="${#lists.isEmpty(communityList)}">
+    <table>
+        <th>Name</th>
+        <th>Leader</th>
+        <th>Type</th>
+        <th>Members</th>
+        <tr th:each="c : ${communityList}">
+            <td th:text="${c.name}"/>
+            <td th:text="${c.leader}"/>
+            <td th:text="${c.type}"/>
+            <td th:text="${c.members}"/>
+        </tr>
+    </table>
+</div>
+
+</body>
+
+</html>
